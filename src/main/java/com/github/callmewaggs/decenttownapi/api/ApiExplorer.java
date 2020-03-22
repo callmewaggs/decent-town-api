@@ -1,32 +1,17 @@
 package com.github.callmewaggs.decenttownapi.api;
 
+import com.github.callmewaggs.decenttownapi.domain.URLBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 public class ApiExplorer {
 
-  static final String SERVICE_KEY =
-      "kFAbmsQtktR1bGKiwv%2F4WlEjtRK0cOzmtuqV3xklR8HsTqIIOCBEj8ZtASp70sopBwaIm6CP15XukuBvut%2FoqQ%3D%3D";
-
   public static void sendUrlRequest() throws IOException {
-    StringBuilder urlBuilder =
-        new StringBuilder(
-            "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHRent"); /*URL*/
-    urlBuilder.append("?");
-    urlBuilder.append(URLEncoder.encode("LAWD_CD", StandardCharsets.UTF_8) + "=");
-    urlBuilder.append(URLEncoder.encode("11110", StandardCharsets.UTF_8)); /*각 지역별 코드*/
-    urlBuilder.append("&");
-    urlBuilder.append(URLEncoder.encode("DEAL_YMD", StandardCharsets.UTF_8) + "=");
-    urlBuilder.append(URLEncoder.encode("201512", StandardCharsets.UTF_8)); /*월 단위 신고자료*/
-    urlBuilder.append("&");
-    urlBuilder.append(URLEncoder.encode("serviceKey", StandardCharsets.UTF_8) + "=");
-    urlBuilder.append(SERVICE_KEY); /*Service Key*/
-    URL url = new URL(urlBuilder.toString());
+    String urlPattern = URLBuilder.build("11110", "201512");
+    URL url = new URL(urlPattern);
     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     conn.setRequestMethod("GET");
     conn.setRequestProperty("Content-type", "application/xml");
