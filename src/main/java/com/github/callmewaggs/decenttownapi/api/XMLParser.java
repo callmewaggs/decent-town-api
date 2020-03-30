@@ -1,6 +1,6 @@
 package com.github.callmewaggs.decenttownapi.api;
 
-import com.github.callmewaggs.decenttownapi.domain.Item;
+import com.github.callmewaggs.decenttownapi.domain.item.RentItem;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
@@ -24,7 +24,7 @@ public class XMLParser {
     return nValue.getNodeValue().trim();
   }
 
-  public static List<Item> parse(String url) {
+  public static List<RentItem> parse(String url) {
     try {
       // parsing할 url 지정(API 키 포함해서)
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -46,9 +46,6 @@ public class XMLParser {
           System.out.println("######################");
           System.out.println(eElement.getTextContent());
           System.out.println("건축년도 : " + getTagValue("건축년도", eElement));
-          System.out.println("계약연도 : " + getTagValue("년", eElement));
-          System.out.println("계약월 : " + getTagValue("월", eElement));
-          System.out.println("계약일 : " + getTagValue("일", eElement));
           System.out.println("지역코드 : " + getTagValue("지역코드", eElement));
           System.out.println("동 : " + getTagValue("법정동", eElement));
           System.out.println("지번 : " + getTagValue("지번", eElement));
@@ -57,6 +54,9 @@ public class XMLParser {
           System.out.println("보증금 : " + getTagValue("보증금액", eElement));
           System.out.println("월세 : " + getTagValue("월세금액", eElement));
           System.out.println("전용면적 : " + getTagValue("전용면적", eElement));
+          System.out.println("계약연도 : " + getTagValue("년", eElement));
+          System.out.println("계약월 : " + getTagValue("월", eElement));
+          System.out.println("계약일 : " + getTagValue("일", eElement));
         } // for end
       } // if end
 
