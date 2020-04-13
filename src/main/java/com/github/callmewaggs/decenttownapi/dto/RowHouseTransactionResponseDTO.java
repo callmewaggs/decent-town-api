@@ -7,15 +7,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-public class RowHouseResponseDTO {
+public class RowHouseTransactionResponseDTO {
 
   private static ObjectMapper objectMapper = new XmlMapper();
 
   public Header header;
   public Body body;
 
-  public static RowHouseResponseDTO parseRowHouseResponseDTO(URL url) throws IOException {
-    return objectMapper.readValue(url, RowHouseResponseDTO.class);
+  public static RowHouseTransactionResponseDTO parseRowHouseTransactionResponseDTO(URL url)
+      throws IOException {
+    return objectMapper.readValue(url, RowHouseTransactionResponseDTO.class);
   }
 
   static class Header {
@@ -35,7 +36,7 @@ public class RowHouseResponseDTO {
   static class Item {
 
     @JacksonXmlProperty(localName = "지역코드")
-    public int regionalCode;
+    public String regionalCode;
 
     @JacksonXmlProperty(localName = "법정동")
     public String dong;
@@ -53,7 +54,10 @@ public class RowHouseResponseDTO {
     public String buildYear;
 
     @JacksonXmlProperty(localName = "전용면적")
-    public String area;
+    public String areaForExclusiveUse;
+
+    @JacksonXmlProperty(localName = "대지권면적")
+    public String siteArea;
 
     @JacksonXmlProperty(localName = "년")
     public String dealYear;
@@ -64,10 +68,7 @@ public class RowHouseResponseDTO {
     @JacksonXmlProperty(localName = "일")
     public String dealDay;
 
-    @JacksonXmlProperty(localName = "보증금액")
-    public String deposit;
-
-    @JacksonXmlProperty(localName = "월세금액")
-    public String monthlyRent;
+    @JacksonXmlProperty(localName = "거래금액")
+    public String dealAmount;
   }
 }
