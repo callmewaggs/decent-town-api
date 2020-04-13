@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-public class RowHouseTransactionResponseDTO {
+public class RowHouseTransactionDTO {
 
   private static ObjectMapper objectMapper = new XmlMapper();
 
   public Header header;
   public Body body;
 
-  public static RowHouseTransactionResponseDTO parseRowHouseTransactionResponseDTO(URL url)
+  public static RowHouseTransactionDTO parseRowHouseTransactionResponseDTO(URL url)
       throws IOException {
-    return objectMapper.readValue(url, RowHouseTransactionResponseDTO.class);
+    return objectMapper.readValue(url, RowHouseTransactionDTO.class);
   }
 
   static class Header {
